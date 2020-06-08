@@ -49,17 +49,87 @@ solveSudoku = () => {
             }
         }
     }
-    flag === 0 ? console.log(JSON.parse(JSON.stringify(grid))) : null ;
+    flag === 0 ? console.log(JSON.parse(JSON.stringify(grid))) : null;
     flag = 1
 }
 
-function tryGrid() {
-    grid[0][8] = 99;
-    console.log(grid);
-    function tryGrid2() {
-        grid[0][7] = 55;
-        console.log(grid);
+initUI = () => {
+    let container_element = document.querySelector(".container");
+
+    let small_div = document.createElement("div");
+    small_div.setAttribute("id", "myDropdown");
+    small_div.setAttribute("class", "dropdown-content");
+
+
+    for (let i = 1; i < 10; i++) {
+        let number_button = document.createElement("button");
+        let text_inside_button = document.createTextNode(i.toString());
+        number_button.appendChild(text_inside_button);
+
+        number_button.setAttribute("onclick", "changeNumber(parentElement,"+i.toString()+")");
+
+        small_div.appendChild(number_button);
     }
 
-    tryGrid2();
+
+
+    let button_element = document.createElement("button");
+    button_element.setAttribute("onclick", "myFunction()");
+    button_element.setAttribute("class", "dropbtn");
+
+    let text_button = document.createTextNode("9");
+    button_element.appendChild(text_button);
+
+    let dropdown_button = document.createElement("div");
+    dropdown_button.setAttribute("class", "dropdown");
+
+
+
+
+    for (let i = 0; i < 81; i++) {
+
+        button_element.setAttribute("onclick", "myFunction(" + i + ")");
+        small_div.setAttribute("id", i.toString());
+        dropdown_button.appendChild(button_element);
+        dropdown_button.appendChild(small_div);
+
+        let element = dropdown_button.cloneNode(true);
+        container_element.appendChild(element);
+        console.log("HERE");
+    }
+
+
+    let buttons = document.querySelectorAll("button.in_button")
+    for ([i, item] of buttons.entries()) {
+        item.setAttribute("id", ((Math.floor(i/9)).toString())+(i%9).toString());
+        let input1 = document.createTextNode("9");
+
+        item.appendChild(input1)
+        console.log(item);
+    }
+}
+
+function myFunction(id) {
+    document.getElementById(id).classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+function changeNumber(id, nr) {
+    let btn = id.previousElementSibling;
+    let new_text = document.createTextNode("5");
+    btn.innerText = nr;
+
 }
