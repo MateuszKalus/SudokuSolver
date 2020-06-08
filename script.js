@@ -47,16 +47,12 @@ ifPossible = (x, y, n) => {
 
 solveSudoku = () => {
 
-//console.log(JSON.parse(JSON.stringify(grid)));
-
     for (let x = 0; x < 9; x++) {
         for (let y = 0; y < 9; y++) {
             if (grid[x][y] === 0) {
                 for (let n = 1; n < 10; n++) {
                     if (ifPossible(x,y,n)) {
                         grid[x][y] = n;
-                        //console.log(1);
-                        //console.log(grid);
                         solveSudoku();
                         //console.log(2);
                         grid[x][y] = 0;
@@ -67,9 +63,6 @@ solveSudoku = () => {
             }
         }
     }
-    console.log("KONIEC")
-    console.log(grid);
-    console.log(grid[0][3]);
     console.log(JSON.parse(JSON.stringify(grid)));
 }
 
