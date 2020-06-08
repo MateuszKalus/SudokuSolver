@@ -1,5 +1,5 @@
 var grid = [
-    [5,3,0,0,7,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
     [6,0,0,1,9,5,0,0,0],
     [0,9,8,0,0,0,0,6,0],
     [8,0,0,0,6,0,0,0,3],
@@ -9,20 +9,6 @@ var grid = [
     [0,0,0,4,1,9,0,0,5],
     [0,0,0,0,8,0,0,7,9]
 ];
-
-// def isPossible(x,y,n):
-// for i in range(0,9):
-// if grid[x][i] == n or grid[i][y] == n:
-// return False
-//
-// xloc = (x//3)*3
-// yloc = (y//3)*3
-//
-// for i in range(0,3):
-// for j in range(0,3):
-// if grid[xloc+i][yloc+j] == n:
-// return False
-// return True
 
 
 ifPossible = (x, y, n) => {
@@ -45,6 +31,7 @@ ifPossible = (x, y, n) => {
     return true;
 }
 
+let flag = 0;
 solveSudoku = () => {
 
     for (let x = 0; x < 9; x++) {
@@ -54,7 +41,6 @@ solveSudoku = () => {
                     if (ifPossible(x,y,n)) {
                         grid[x][y] = n;
                         solveSudoku();
-                        //console.log(2);
                         grid[x][y] = 0;
                     }
                 }
@@ -63,7 +49,8 @@ solveSudoku = () => {
             }
         }
     }
-    console.log(JSON.parse(JSON.stringify(grid)));
+    flag === 0 ? console.log(JSON.parse(JSON.stringify(grid))) : null ;
+    flag = 1
 }
 
 function tryGrid() {
